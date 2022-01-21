@@ -42,3 +42,26 @@ npm install -D sass-loader sass
 ```
 
 이처럼 style에 scss를 전달해주면 scss가 적용되는 것을 확인할 수 있음
+
+### scss에서 공통적인 부분 처리하기
+
+reset부분이나 앱에서 사용할 수 있는 색의 경우 한곳에 정의해두고 공통적으로 처리할 수 있다.
+
+```js
+// vue.config.js 파일
+
+module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `
+            @import "@/styles/reset.scss";
+          `,
+      },
+    },
+  },
+};
+```
+
+vue.config.js 파일에 sass 부분에 additionalData를 주고 각 페이지 마다 삽입될 부분을 적어주면 된다.  
+기본적으로 src/styles에 공통적인 스타일을 적용하도록 폴더를 만들었다.
