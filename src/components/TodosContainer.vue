@@ -1,9 +1,12 @@
 <template>
-  <div class="container"></div>
+  <div class="container">
+    <Todo />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Todo from "./Todo.vue";
 
 interface ITodo {
   id: number;
@@ -14,6 +17,9 @@ interface ITodo {
 
 export default defineComponent({
   name: "TodosContainer.vue",
+  components: {
+    Todo,
+  },
   data() {
     return {
       todos: [
