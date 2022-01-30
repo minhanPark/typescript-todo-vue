@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <Todo />
+    <Todo
+      v-for="todo in todos"
+      :key="todo.id"
+      :isCompleted="todo.isCompleted"
+    />
   </div>
 </template>
 
