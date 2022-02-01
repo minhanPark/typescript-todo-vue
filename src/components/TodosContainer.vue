@@ -3,7 +3,9 @@
     <Todo
       v-for="todo in todos"
       :key="todo.id"
-      :isCompleted="todo.isCompleted"
+      :="todo"
+      @deleteTodoEvent="deleteTodo"
+      @toggleTodoEvent="toggleComplete"
     />
   </div>
 </template>
@@ -58,6 +60,18 @@ export default defineComponent({
       this.setTodos(newArr);
     },
     // Complete수정기능
+    toggleComplete(id: number): void {
+      const newArr = this.todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            isCompleted: !todo.isCompleted,
+          };
+        }
+        return todo;
+      });
+      this.setTodos(newArr);
+    },
     // 추가 기능
     addTodo({ title, desc }: { title: string; desc: string }): void {
       const id = this.todos[this.todos.length - 1]["id"] + 1;

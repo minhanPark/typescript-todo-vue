@@ -1,9 +1,15 @@
 <template>
-  <div class="wrapper" :class="{ isCompleted: this.isCompleted }">
-    <h2 class="title" :class="{ isCompleted: this.isCompleted }">타이틀</h2>
-    <p class="para" :class="{ isCompleted: this.isCompleted }">내용</p>
+  <div
+    class="wrapper"
+    :class="{ isCompleted: this.isCompleted }"
+    @click="toggleTodo"
+  >
+    <h2 class="title" :class="{ isCompleted: this.isCompleted }">
+      {{ title }}
+    </h2>
+    <p class="para" :class="{ isCompleted: this.isCompleted }">{{ desc }}</p>
     <div class="btn-wrapper">
-      <button class="btn">Delete</button>
+      <button class="btn" @click="deleteTodo">Delete</button>
     </div>
   </div>
 </template>
@@ -17,6 +23,14 @@ export default defineComponent({
     title: String,
     desc: String,
     isCompleted: Boolean,
+  },
+  methods: {
+    deleteTodo() {
+      this.$emit("deleteTodoEvent", this.id);
+    },
+    toggleTodo() {
+      this.$emit("toggleTodoEvent", this.id);
+    },
   },
 });
 </script>
@@ -36,11 +50,19 @@ export default defineComponent({
   font-weight: bold;
   margin-bottom: 15px;
   text-decoration: "none";
-  color: "black";
+  color: black;
+  &.isCompleted {
+    text-decoration: line-through;
+    color: white;
+  }
 }
 .para {
   text-decoration: "none";
-  color: "black";
+  color: black;
+  &.isCompleted {
+    text-decoration: line-through;
+    color: white;
+  }
 }
 .btn-wrapper {
   display: flex;
