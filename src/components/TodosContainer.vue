@@ -8,11 +8,13 @@
       @toggleTodoEvent="toggleComplete"
     />
   </div>
+  <TodoInput @addTodoEvent="addTodo" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Todo from "./Todo.vue";
+import TodoInput from "./TodoInput.vue";
 
 interface ITodo {
   id: number;
@@ -25,6 +27,7 @@ export default defineComponent({
   name: "TodosContainer.vue",
   components: {
     Todo,
+    TodoInput,
   },
   data() {
     return {
